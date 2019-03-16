@@ -1,0 +1,53 @@
+\documentclass{article}
+\usepackage[UTF8]{ctexcap}
+\usepackage{amsmath}
+
+\title{周二计量作业}
+\author{outsider}
+\date{March 2019}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+    \item 证明条件期望的迭对定律
+    
+    \item 证明课件Th3.3 Frisch-Waugh(Ch1-P10)。 In the least squares regression of vector $y$ on two set of variables. $X_1$ and $X_2$, the subvector $b_2$ is the set of coefficients obtained when the residuals from a regresiion of $y$ on $X_1$ alone are regressed on the set of residuals obtained when each column of $X_2$ is regressed on $X_1$.
+    
+    \item 证明BLUE中的有效性。令$b^{*}=\beta+(X'X)^{-1}X'\epsilon+C\epsilon$，其中$CX=0$，证明$Var(b^*|X)$
+    
+    \item 回归方程$y_i=\beta_0+\beta_1X_{i1}+\beta_2X_{i2}+\cdots+\beta_KX_{iK}+\epsilon_i$存在异方差的问题，假定残差的方差为$\sigma_i^2=\sigma^2X_{ik}^2$。将回归方程重写为
+    $$
+      \frac{y_i}{X_{ik}}=\frac{\beta_0}{X_{ik}}+\beta_1\frac{X_{i1}}{X_{ik}}+\cdots+\beta_K\frac{X_{iK}}{X_{ik}}+\frac{\epsilon_i}{X_{ik}}
+    $$
+    按照加权最小二乘估计(WLS)进行参数估计。证明WLS是GLS的一种特殊情况。
+    
+    \item 回归模型服从以下方程
+    $$
+    \left\{
+      \begin{aligned}
+        y_t&=\alpha+\beta x_t+\epsilon_t \\
+        \epsilon_t&=\rho \epsilon_{t-1}+\epsilon_t^{*} \\
+        \epsilon_t^{*} &\sim \text{白噪声}\\
+      \end{aligned}
+    \right.
+    $$
+    因此将上述变量作广义差分处理，如下
+    $$
+    \left\{
+      \begin{aligned}
+        y_t^* &= y_t-\rho y_{t-1} \\
+        x_t^* &= x_t=\rho x_{t-1}  \\
+        \epsilon_t^* &= \epsilon_t-\rho \epsilon_{t-1} \\
+      \end{aligned}
+    \right.
+    $$
+    并对如下模型进行参数估计
+    $$
+      y_t^* = \widetilde{\alpha}+\widetilde{\beta}x_t^*+\epsilon_t^*
+    $$
+    证明这仍是一种特殊的GLS
+\end{enumerate}
+
+\end{document}
