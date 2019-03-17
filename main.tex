@@ -1,6 +1,16 @@
 \documentclass{article}
 \usepackage[UTF8]{ctexcap}
+\usepackage{hyperref}
 \usepackage{amsmath}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\urlstyle{same}
 
 \title{周二计量作业}
 \author{outsider}
@@ -11,11 +21,15 @@
 \maketitle
 
 \begin{enumerate}
-    \item 证明条件期望的迭对定律
+    \item \textbf{证明条件期望的迭对定律。}Green P1045
     
-    \item 证明课件Th3.3 Frisch-Waugh(Ch1-P10)。 In the least squares regression of vector $y$ on two set of variables. $X_1$ and $X_2$, the subvector $b_2$ is the set of coefficients obtained when the residuals from a regresiion of $y$ on $X_1$ alone are regressed on the set of residuals obtained when each column of $X_2$ is regressed on $X_1$.
+    \href{https://en.wikipedia.org/wiki/Law_of_total_expectation}{离散情况}
     
-    \item 证明BLUE中的有效性。令$b^{*}=\beta+(X'X)^{-1}X'\epsilon+C\epsilon$，其中$CX=0$，证明$Var(b^*|X)$
+    连续情况，见唐小斌课件，数学知识回顾，第五页PDF
+    
+    \item \textbf{证明课件Th3.3 Frisch-Waugh(Ch1-P10)。} In the least squares regression of vector $y$ on two set of variables. $X_1$ and $X_2$, the subvector $b_2$ is the set of coefficients obtained when the residuals from a regresiion of $y$ on $X_1$ alone are regressed on the set of residuals obtained when each column of $X_2$ is regressed on $X_1$.
+    
+    \item \textbf{证明BLUE中的有效性。}令$b^{*}=\beta+(X'X)^{-1}X'\epsilon+C\epsilon$，其中$CX=0$，证明$Var(b^*|X)$
     
     \item 回归方程$y_i=\beta_0+\beta_1X_{i1}+\beta_2X_{i2}+\cdots+\beta_KX_{iK}+\epsilon_i$存在异方差的问题，假定残差的方差为$\sigma_i^2=\sigma^2X_{ik}^2$。将回归方程重写为
     $$
@@ -38,7 +52,7 @@
     \left\{
       \begin{aligned}
         y_t^* &= y_t-\rho y_{t-1} \\
-        x_t^* &= x_t=\rho x_{t-1}  \\
+        x_t^* &= x_t-\rho x_{t-1}  \\
         \epsilon_t^* &= \epsilon_t-\rho \epsilon_{t-1} \\
       \end{aligned}
     \right.
@@ -48,6 +62,15 @@
       y_t^* = \widetilde{\alpha}+\widetilde{\beta}x_t^*+\epsilon_t^*
     $$
     证明这仍是一种特殊的GLS
+    
+    参考 于俊年 计量经济学 第138页和第156页的内容
 \end{enumerate}
 
+\section*{Miscellaneous}
+
+这一部分主要填充一些各种老师上课时透露的题目，包括以往年的题目。
+
+\begin{enumerate}
+    \item \textbf{线性变形对回归的影响。}证明：将数据的第一行和最后一行交换位置，结果不变。
+\end{enumerate}
 \end{document}
