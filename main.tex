@@ -2,11 +2,12 @@
 \usepackage[UTF8]{ctexcap}
 \usepackage{hyperref}
 \usepackage{amsmath}
+\usepackage{amssymb}
 
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
-    filecolor=magenta,      
+    filecolor=magenta,
     urlcolor=cyan,
 }
 
@@ -23,20 +24,122 @@
 \begin{enumerate}
     \item \textbf{证明条件期望的迭对定律。}Green P1045
     
-    \href{https://en.wikipedia.org/wiki/Law_of_total_expectation}{离散情况}
+    来源：唐晓彬课件，数学知识回顾，第五页PDF
     
-    连续情况，见唐小斌课件，数学知识回顾，第五页PDF
+    \textbf{Proof}
     
-    \item \textbf{证明课件Th3.3 Frisch-Waugh(Ch1-P10)。} In the least squares regression of vector $y$ on two set of variables. $X_1$ and $X_2$, the subvector $b_2$ is the set of coefficients obtained when the residuals from a regresiion of $y$ on $X_1$ alone are regressed on the set of residuals obtained when each column of $X_2$ is regressed on $X_1$.
+    离散情况
     
+    $$
+      \begin{aligned}
+        & E_X[E(Y|X)] = \sum_{i}P(X=x_i)E(Y|x_i) \\
+        & = \sum_iP(X=x_i)[\sum_jP(Y=y_i|x_i)y_j] \\
+        & = \sum_iP(X=x_i)[\sum_j\frac{P(X=x_i, Y=y_i)}{P(X=x_i)} y_j] \\
+        & = \sum_i[\sum_jP(X=x_i, Y=y_j) y_j] \\
+        & = \sum_j[\sum_iP(X=x_i, Y=y_j) y_j] \ \ \ \ \ \ \ \ \ \ \text{交换加总次序}\\
+        & = \sum_j[y_j \sum_iP(X=x_i, Y=y_j)] \\
+        & = \sum_jy_jP(Y=y_j) \\
+        & = E(Y)
+      \end{aligned}
+    $$
+    
+    连续情况
+    
+    $$
+      \begin{aligned}
+        \because & E_X(g) = \int_{x} gf(x)dx\ \ \ \ and \ \ \ \ E(y|x) = \int_yyf(y|x)dy \\
+        \therefore & E_X[E(Y|X=x)] = \int_x [E(Y|X=x)]f(x) dx \\
+        & = \int_x\left( \int_yyf(y|x)dy \right) f(x)dx \\
+        & = \int_x \int_y yf(y|x)dy f(x)dx \\
+        & = \int_x \int_y yf(y|x)f(x)dxdy \\
+        & = \int_x \int_y yf(x, y)dxdy \\
+        & = \int_y yf(y)dy = E(y)
+      \end{aligned}
+    $$
+
+    \item \textbf{证明课件Th3.3 Frisch-Waugh(Ch1-P10)。} In the least squares regression of vector $y$ on two set of variables. $X_1$ and $X_2$, the subvector $b_2$ is the set of coefficients obtained when the residuals from a regression of $y$ on $X_1$ alone are regressed on the set of residuals obtained when each column of $X_2$ is regressed on $X_1$.
+        
+        来源：周一计量课上的证明
+        
+        \textbf{Proof}
+        
+        先证系数相等
+        
+        $$
+          \begin{aligned}
+            X_1'Y & = X_1'(X_1\widehat{\beta_1}+X_2\widehat{\beta_2}+e) \\
+            & = X_1'X_1\widehat{\beta_1}+X_1'X_2\widehat{\beta_2}+X_1'e \\
+            & = X_1'X_1\widehat{\beta_1}+X_1'X_2\widehat{\beta_2} \ \ \ \ \ \ \ (1)
+          \end{aligned}
+        $$
+        
+        同理可得
+        
+        $$
+          \begin{aligned}
+            X_2'Y = X_2'X_1\widehat{\beta_1} + X_2'X_2\widehat{\beta_2} \ \ \ \ \ (2)
+          \end{aligned}
+        $$
+        
+        令(1)式左乘$X_1(X_1'X_1)^{-1}$
+        
+        $$
+          \begin{aligned}
+            & X_1(X_1'X_1)^{-1}X_1'Y \\
+            = & X_1(X_1'X_1)^{-1}X_1'X_1\widehat{\beta_1} + X_1(X_1'X_1)^{-1}X_1'X_2\widehat{\beta_2} \\
+            = & X_1\widehat{\beta_1}+P_{X_1}X_2\widehat{\beta_2} = P_{X_1}Y
+          \end{aligned}
+        $$
+        
+        考虑到
+        
+        $$
+          \begin{aligned}
+            X_1\widehat{\beta_1} = & P_{X_1}Y - P_{X_1}X_2\widehat{\beta} \\
+            = & P_{X_1}(Y-X_2\widehat{\beta}) \ \ \ \ \ \ \ \ \ \ \ (3)
+          \end{aligned}
+        $$
+        
+        将(3)式代入(2)式，得到
+        
+        $$
+          \begin{aligned}
+            X_2'Y = X_2'P_{X_1}Y - X_2'P_{X_1}X_2\widehat{\beta_2}+X_2'X_2\widehat{\beta_2} \\
+            X_2'(I-P_{X_1})Y = X_2'(I-P_{X_1})X_2\widehat{\beta_2} \\
+            X_2'M_{X_1}Y = X_2'M_{X_1}X_2\widehat{\beta_2} \\
+            \widehat{\beta_2} = (X_2'M_{X_1}X_1)^{-1}(X_2'M_{X_1}Y)
+          \end{aligned}
+        $$
+        
+        再证残差项等
+        
+        $$
+          e = T - _1\widehat{\beta_1}-X_2\widehat{\beta_2}
+        $$
+        
+        两边同乘$M_{X_1} = I-P_{X_1}$，利用$P_{X_1}e=0$
+        
+        $$
+          \begin{aligned}
+            e = (I-P_{X_1})Y-(I-P_{X_1})X_1\widehat{\beta_1} - (I-P_{X_1})X_2\widehat{\beta_2} \\
+            = Y^* - X_2^*\widehat{\beta_2}=e^*
+          \end{aligned}
+        $$
+        
+        如何得到$b_1$
+        
+        $$
+          b_1 = (X_1'X_1)X_1'Y-(X_1'X_1)^{-1}X_1'X_2\widehat{\beta_2}
+        $$
+
     \item \textbf{证明BLUE中的有效性。}令$b^{*}=\beta+(X'X)^{-1}X'\epsilon+C\epsilon$，其中$CX=0$，证明$Var(b^*|X)$
-    
+
     \item 回归方程$y_i=\beta_0+\beta_1X_{i1}+\beta_2X_{i2}+\cdots+\beta_KX_{iK}+\epsilon_i$存在异方差的问题，假定残差的方差为$\sigma_i^2=\sigma^2X_{ik}^2$。将回归方程重写为
     $$
       \frac{y_i}{X_{ik}}=\frac{\beta_0}{X_{ik}}+\beta_1\frac{X_{i1}}{X_{ik}}+\cdots+\beta_K\frac{X_{iK}}{X_{ik}}+\frac{\epsilon_i}{X_{ik}}
     $$
     按照加权最小二乘估计(WLS)进行参数估计。证明WLS是GLS的一种特殊情况。
-    
+
     \item 回归模型服从以下方程
     $$
     \left\{
@@ -62,7 +165,7 @@
       y_t^* = \widetilde{\alpha}+\widetilde{\beta}x_t^*+\epsilon_t^*
     $$
     证明这仍是一种特殊的GLS
-    
+
     参考 于俊年 计量经济学 第138页和第156页的内容
 \end{enumerate}
 
