@@ -133,13 +133,112 @@
         $$
 
     \item \textbf{证明BLUE中的有效性。}令$b^{*}=\beta+(X'X)^{-1}X'\epsilon+C\epsilon$，其中$CX=0$，证明$Var(b^*|X)$
+    
+    来源：OUTSIDER
+    
+    \textbf{Proof}
+    
+    $$
+      \begin{aligned}
+        &Cov((X'X)^{-1}X'\epsilon,\ C\epsilon) \\
+        = &E[((X'X)^{-1}X'\epsilon)(C\epsilon)] - E[(X'X)^{-1}X'\epsilon]E[C\epsilon] \\
+        = &E[((X'X)^{-1}X'\epsilon)(C\epsilon)] \ \ \ \ \ \ \ \ C\epsilon\text{是一个数}\\
+        = &E[(X'X)^{-1}X'\epsilon\epsilon'C'] \\
+        = &\sigma^2E[(X'X)^{-1}X'C'] \\
+        = &\sigma^2E[(X'X)^{-1}(CX)'] = 0
+      \end{aligned}
+    $$
+    
+    补BLUE有效性的证明
+    
+    来源：Econometrics Analysis P60
+    
+    \textbf{Proof}
+    
+    定义$b_0=Cy$是另一个对$\beta$的线性无偏估计量，则有
+    
+    $$
+    E[Cy|X] = E[(CX\beta+C\epsilon)|X] = \beta
+    $$
+    
+    可以证明$CX=I$成立,$b_0$的条件方差为
+    
+    $$
+    Var[b_0|X] = \sigma^2CC'
+    $$
+    
+    定义$D=C-(X'X)^{-1}X'$，则有
+    
+    $$
+    Var[b_0|x] = \sigma^2[(D+(X'X)^{-1}X')(D+(X'X)^{-1}X')']
+    $$
+    
+    由于$CX=I=DX+(X'X)^{-1}(X'X)$，因此，必须有$DX=0$，所以
+    
+    $$
+    Var[b_0|X] = \sigma^2(X'X)^{-1}+\sigma^2DD'=Var[b|X]+\sigma^2DD'
+    $$
+    
+    由于$DD'=q'DD'q=z'z\ge 0$，所以有$Var[b_0|X] \ge Var[b|X]$
+    
+    所以$b$是
 
     \item 回归方程$y_i=\beta_0+\beta_1X_{i1}+\beta_2X_{i2}+\cdots+\beta_KX_{iK}+\epsilon_i$存在异方差的问题，假定残差的方差为$\sigma_i^2=\sigma^2X_{ik}^2$。将回归方程重写为
     $$
       \frac{y_i}{X_{ik}}=\frac{\beta_0}{X_{ik}}+\beta_1\frac{X_{i1}}{X_{ik}}+\cdots+\beta_K\frac{X_{iK}}{X_{ik}}+\frac{\epsilon_i}{X_{ik}}
     $$
     按照加权最小二乘估计(WLS)进行参数估计。证明WLS是GLS的一种特殊情况。
-
+    
+    来源：OUTSIDER
+    
+    \textbf{Proof}
+    
+    定义$\Omega$
+    
+    $$\Large\Omega=
+    \Large\begin{array}{cccc}
+      \frac{1}{x_{ik}} & 0 & \cdots & 0 \\
+      0 & \frac{1}{x_{ik}} & \cdots & 0 \\
+      0 &   & \ddots & \vdots \\
+      0 & 0 & \cdots & \frac{1}{x_{ik}} \\
+    \end{array}
+    $$
+    
+    将$\Omega^{-1/2}$乘到回归模型的两端，得到
+    
+    $$
+    \Omega^{-1/2}y=\Omega^{-1/2}X\beta+\Omega^{-1/2}\epsilon
+    $$
+    
+    令
+    
+    $$
+    \left\{
+      \begin{aligned}
+        y^* &= \Omega^{-1/2}y \\
+        X^* &= \Omega^{-1/2}X \\
+        \epsilon^* &= \Omega^{-1/2}\epsilon \\
+      \end{aligned}
+    \right.
+    $$
+    
+    则有
+    
+    \begin{itemize}
+      \item $E(\epsilon^*|X)=0$
+      \item $Var(\epsilon^*|X) = \Omega^{-1/2}Var(\epsilon)\Omega^{-1/2}=\sigma^2\Omega^{-1/2}\Omega\Omega^{-1/2}=\sigma^2I$
+    \end{itemize}
+    
+    所以
+    
+    $$
+    \begin{aligned}
+      b &= (X^{*'}X^*)^{-1}X^{*'}y^* \\
+      &= (X'\Omega^{-1/2}\Omega^{-1/2}X)^{-1}(X'\Omega^{-1/2})\Omega^{-1/2}y \\
+      &= (X'\Omega^{-1} X)^{-1}(X'\Omega^{-1}y)
+    \end{aligned}
+    $$
+    
     \item 回归模型服从以下方程
     $$
     \left\{
