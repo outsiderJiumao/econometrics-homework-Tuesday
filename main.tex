@@ -23,13 +23,13 @@
 
 \begin{enumerate}
     \item \textbf{证明条件期望的迭对定律。}Green P1045
-    
+
     来源：唐晓彬课件，数学知识回顾，第五页PDF
-    
+
     \textbf{Proof}
-    
+
     离散情况
-    
+
     $$
       \begin{aligned}
         & E_X[E(Y|X)] = \sum_{i}P(X=x_i)E(Y|x_i) \\
@@ -42,9 +42,9 @@
         & = E(Y)
       \end{aligned}
     $$
-    
+
     连续情况
-    
+
     $$
       \begin{aligned}
         \because & E_X(g) = \int_{x} gf(x)dx\ \ \ \ and \ \ \ \ E(y|x) = \int_yyf(y|x)dy \\
@@ -58,13 +58,83 @@
     $$
 
     \item \textbf{证明课件Th3.3 Frisch-Waugh(Ch1-P10)。} In the least squares regression of vector $y$ on two set of variables. $X_1$ and $X_2$, the subvector $b_2$ is the set of coefficients obtained when the residuals from a regression of $y$ on $X_1$ alone are regressed on the set of residuals obtained when each column of $X_2$ is regressed on $X_1$.
-        
+
+    来源：Econometrics Analysis
+
+    \textbf{Proof}
+
+    $$
+    y=X\beta+\epsilon=X_1\beta_1+X_2\beta_2+\epsilon
+    $$
+    进而
+    $$
+    \left[
+    \begin{array}{cc}
+      X_1'X_1 & X_1'X_2 \\
+      X_2'X_1 & X_2'X_2 \\
+    \end{array}
+    \right]
+    \left[
+    \begin{array}{c}
+      b_1 \\
+      b_2
+    \end{array}
+    \right]
+    =
+    \left[
+    \begin{array}{c}
+      X_1'y \\
+      X_2'y
+    \end{array}
+    \right]
+    $$
+
+    求解出$b_1$
+
+    $$
+    b_1=(X_1'X_1)^{-1}X_1'y-(X_1'X_1)^{-1}X_1'X_2b_2==(X_1'X_1)^{-1}X_1'(y-X_2b_2)
+    $$
+
+    并且有
+
+    $$
+    X_2'X_1b_1+X_2'X_2b_2=X_2'y
+    $$
+
+    将$b_1$带入，有
+
+    $$
+    X_2'X_1(X_1'X_1)^{-1}X_1'y-X_2'X_1(X_1'X_1)^{-1}X_1'X_2b_2+X_2'X_2b_2=X_2'y
+    $$
+
+    整理后可得
+
+    $$
+    \begin{aligned}
+    b_2 =& [X_2'(I-X_1(X_1'X_1)^{-1}X_1')X_2]^{-1}[X_2'(I-X_1(X_1'X_1)^{-1}X_1')y] \\
+    =& (X_2'M_1X_2)^{-1}(X_2'M_1y)
+    \end{aligned}
+    $$
+
+    令
+
+    $$
+    \left\{
+    \begin{aligned}
+    X_2^{*'} &= M_1X_2 \\
+    y^* &= M_1y \\
+    \end{aligned}
+    \right.
+    $$
+    
+    \noindent\rule{\textwidth}{0.4pt}
+
         来源：周一计量课上的证明
-        
+
         \textbf{Proof}
-        
+
         先证系数相等
-        
+
         $$
           \begin{aligned}
             X_1'Y & = X_1'(X_1\widehat{\beta_1}+X_2\widehat{\beta_2}+e) \\
@@ -72,17 +142,17 @@
             & = X_1'X_1\widehat{\beta_1}+X_1'X_2\widehat{\beta_2} \ \ \ \ \ \ \ (1)
           \end{aligned}
         $$
-        
+
         同理可得
-        
+
         $$
           \begin{aligned}
             X_2'Y = X_2'X_1\widehat{\beta_1} + X_2'X_2\widehat{\beta_2} \ \ \ \ \ (2)
           \end{aligned}
         $$
-        
+
         令(1)式左乘$X_1(X_1'X_1)^{-1}$
-        
+
         $$
           \begin{aligned}
             & X_1(X_1'X_1)^{-1}X_1'Y \\
@@ -90,54 +160,54 @@
             = & X_1\widehat{\beta_1}+P_{X_1}X_2\widehat{\beta_2} = P_{X_1}Y
           \end{aligned}
         $$
-        
+
         考虑到
-        
+
         $$
           \begin{aligned}
             X_1\widehat{\beta_1} = & P_{X_1}Y - P_{X_1}X_2\widehat{\beta} \\
             = & P_{X_1}(Y-X_2\widehat{\beta}) \ \ \ \ \ \ \ \ \ \ \ (3)
           \end{aligned}
         $$
-        
+
         将(3)式代入(2)式，得到
-        
+
         $$
           \begin{aligned}
-            X_2'Y = X_2'P_{X_1}Y - X_2'P_{X_1}X_2\widehat{\beta_2}+X_2'X_2\widehat{\beta_2} \\
-            X_2'(I-P_{X_1})Y = X_2'(I-P_{X_1})X_2\widehat{\beta_2} \\
-            X_2'M_{X_1}Y = X_2'M_{X_1}X_2\widehat{\beta_2} \\
-            \widehat{\beta_2} = (X_2'M_{X_1}X_1)^{-1}(X_2'M_{X_1}Y)
+            X_2'Y &= X_2'P_{X_1}Y - X_2'P_{X_1}X_2\widehat{\beta_2}+X_2'X_2\widehat{\beta_2} \\
+            X_2'(I-P_{X_1})Y &= X_2'(I-P_{X_1})X_2\widehat{\beta_2} \\
+            X_2'M_{X_1}Y &= X_2'M_{X_1}X_2\widehat{\beta_2} \\
+            \widehat{\beta_2} &= (X_2'M_{X_1}X_1)^{-1}(X_2'M_{X_1}Y)
           \end{aligned}
         $$
-        
+
         再证残差项等
-        
+
         $$
           e = T - _1\widehat{\beta_1}-X_2\widehat{\beta_2}
         $$
-        
+
         两边同乘$M_{X_1} = I-P_{X_1}$，利用$P_{X_1}e=0$
-        
+
         $$
           \begin{aligned}
-            e = (I-P_{X_1})Y-(I-P_{X_1})X_1\widehat{\beta_1} - (I-P_{X_1})X_2\widehat{\beta_2} \\
-            = Y^* - X_2^*\widehat{\beta_2}=e^*
+            e &= (I-P_{X_1})Y-(I-P_{X_1})X_1\widehat{\beta_1} - (I-P_{X_1})X_2\widehat{\beta_2} \\
+            &= Y^* - X_2^*\widehat{\beta_2}=e^*
           \end{aligned}
         $$
-        
+
         如何得到$b_1$
-        
+
         $$
           b_1 = (X_1'X_1)X_1'Y-(X_1'X_1)^{-1}X_1'X_2\widehat{\beta_2}
         $$
 
     \item \textbf{证明BLUE中的有效性。}令$b^{*}=\beta+(X'X)^{-1}X'\epsilon+C\epsilon$，其中$CX=0$，证明$Var(b^*|X)$
-    
+
     来源：OUTSIDER
-    
+
     \textbf{Proof}
-    
+
     $$
       \begin{aligned}
         &Cov((X'X)^{-1}X'\epsilon,\ C\epsilon) \\
@@ -148,39 +218,41 @@
         = &\sigma^2E[(X'X)^{-1}(CX)'] = 0
       \end{aligned}
     $$
-    
+
+    \noindent\rule{\textwidth}{0.4pt}
+
     补BLUE有效性的证明
-    
+
     来源：Econometrics Analysis P60
-    
+
     \textbf{Proof}
-    
+
     定义$b_0=Cy$是另一个对$\beta$的线性无偏估计量，则有
-    
+
     $$
     E[Cy|X] = E[(CX\beta+C\epsilon)|X] = \beta
     $$
-    
+
     可以证明$CX=I$成立,$b_0$的条件方差为
-    
+
     $$
     Var[b_0|X] = \sigma^2CC'
     $$
-    
+
     定义$D=C-(X'X)^{-1}X'$，则有
-    
+
     $$
     Var[b_0|x] = \sigma^2[(D+(X'X)^{-1}X')(D+(X'X)^{-1}X')']
     $$
-    
+
     由于$CX=I=DX+(X'X)^{-1}(X'X)$，因此，必须有$DX=0$，所以
-    
+
     $$
     Var[b_0|X] = \sigma^2(X'X)^{-1}+\sigma^2DD'=Var[b|X]+\sigma^2DD'
     $$
-    
+
     由于$DD'=q'DD'q=z'z\ge 0$，所以有$Var[b_0|X] \ge Var[b|X]$
-    
+
     所以$b$是
 
     \item 回归方程$y_i=\beta_0+\beta_1X_{i1}+\beta_2X_{i2}+\cdots+\beta_KX_{iK}+\epsilon_i$存在异方差的问题，假定残差的方差为$\sigma_i^2=\sigma^2X_{ik}^2$。将回归方程重写为
@@ -188,13 +260,13 @@
       \frac{y_i}{X_{ik}}=\frac{\beta_0}{X_{ik}}+\beta_1\frac{X_{i1}}{X_{ik}}+\cdots+\beta_K\frac{X_{iK}}{X_{ik}}+\frac{\epsilon_i}{X_{ik}}
     $$
     按照加权最小二乘估计(WLS)进行参数估计。证明WLS是GLS的一种特殊情况。
-    
+
     来源：OUTSIDER
-    
+
     \textbf{Proof}
-    
+
     定义$\Omega$
-    
+
     $$\Large\Omega=
     \Large\begin{array}{cccc}
       \frac{1}{x_{ik}} & 0 & \cdots & 0 \\
@@ -203,15 +275,15 @@
       0 & 0 & \cdots & \frac{1}{x_{ik}} \\
     \end{array}
     $$
-    
+
     将$\Omega^{-1/2}$乘到回归模型的两端，得到
-    
+
     $$
     \Omega^{-1/2}y=\Omega^{-1/2}X\beta+\Omega^{-1/2}\epsilon
     $$
-    
+
     令
-    
+
     $$
     \left\{
       \begin{aligned}
@@ -221,16 +293,16 @@
       \end{aligned}
     \right.
     $$
-    
+
     则有
-    
+
     \begin{itemize}
       \item $E(\epsilon^*|X)=0$
       \item $Var(\epsilon^*|X) = \Omega^{-1/2}Var(\epsilon)\Omega^{-1/2}=\sigma^2\Omega^{-1/2}\Omega\Omega^{-1/2}=\sigma^2I$
     \end{itemize}
-    
+
     所以
-    
+
     $$
     \begin{aligned}
       b &= (X^{*'}X^*)^{-1}X^{*'}y^* \\
@@ -238,7 +310,7 @@
       &= (X'\Omega^{-1} X)^{-1}(X'\Omega^{-1}y)
     \end{aligned}
     $$
-    
+
     \item 回归模型服从以下方程
     $$
     \left\{
